@@ -1,1 +1,1 @@
-# mlb-pitch-sequencing
+# The Importance of Pitch Sequencing in the MLB
