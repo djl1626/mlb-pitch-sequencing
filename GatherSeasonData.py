@@ -1,14 +1,15 @@
 """
 Gathers all Statcast data from 2023 MLB season.
 """
-
+import pybaseball.cache
 from pybaseball import statcast
 import pandas as pd
 
-# data = statcast(start_dt='2023-03-30', end_dt='2023-11-03')
-# data.to_csv('/Data/2023StatcastData.csv')
+pybaseball.cache.enable()
+data = statcast(start_dt='2023-03-30', end_dt='2023-11-03')
+data.to_csv('/Users/djl47/PycharmProjects/BaseballDS/mlb-pitch-sequencing/Data/2023StatcastData.csv')
 
-statcast2023data = pd.read_csv("Data/2023StatcastData.csv")
+statcast2023data = pd.read_csv("/Users/djl47/PycharmProjects/BaseballDS/mlb-pitch-sequencing/Data/2023StatcastData.csv")
 playeriddata = pd.read_csv("Data/SFBB Player ID Map - PLAYERIDMAP.csv")
 
 playeriddata = playeriddata[['FIRSTNAME', 'LASTNAME', 'IDFANGRAPHS', 'MLBID']]
@@ -26,4 +27,4 @@ statcast2023datawithnames = (pd.merge(statcast2023datawithnames, playeriddata, l
                                               'IDFANGRAPHS': 'batter_fangraphs_id',
                                               'full_name': 'batter_full_name'})
                              .drop(columns=['MLBID'], axis=1))
-statcast2023datawithnames.to_csv("Data/2023StatcastDataWithPlayerNames.csv")
+statcast2023datawithnames.to_csv("/Users/djl47/PycharmProjects/BaseballDS/mlb-pitch-sequencing/Data/2023StatcastDataWithPlayerNames.csv")

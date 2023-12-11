@@ -8,8 +8,14 @@ from pybaseball import playerid_lookup, teamid_lookup
 
 def writeToCSV(data: pd.DataFrame, file_path: str):
     if not file_path:
-        file_path = "Data/"
+        file_path = "../../Data/"
     data.to_csv(file_path)
+
+
+def applyFilters(data: pd.DataFrame, balls: int, strikes: int):
+    if balls or strikes:
+        data = getDataForCount(data, balls, strikes)
+    return data
 
 
 def getDataForTeam(data: pd.DataFrame, team: str, write_csv: bool, file_path: str):
@@ -27,4 +33,12 @@ def getDataForPitcher(data: pd.DataFrame, pitcher: str, write_csv: bool, file_pa
     data = data[data['pitcher'] == pitcher]
     if write_csv:
         writeToCSV(data, file_path)
+    return data
+
+
+def getDataForCount(data: pd.DataFrame, balls: int, strikes: int):
+    if balls is not None:
+        data = data[data['balls'] == balls]
+    if strikes is not None:
+        data = data[data['strikes'] == strikes]
     return data
