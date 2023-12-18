@@ -6,3 +6,7 @@ In the MLB, teams tend to seek out pitchers with better pitch characteristics wh
 With all the above said, there are plenty of pitchers in the MLB who have success with average or below average "stuff". The code for this project will be used to try and determine how these pitchers have success at the major league level. Specifically, I will look at the art of pitch sequencing. Pitch sequencing is the order a pitcher throws his specific pitches in an attempt to further deceive the hitter. The goal is to identify pitchers who are effectively sequence their pitchers to yield more success than may be expected.
 
 ## The Data:
+The data for this project consists of 3 main datasets:
+1. Every pitch from the 2023 MLB season, sourced from Baseball Savant via the PyBaseball Python package
+2. FanGraphs Stuff+ Metric from FanGraphs.com **ADD LINK**
+3. A crosswalk between players Baseball Savant ID and FanGraphs IDs, sourced from [SmartFantasyBaseball.com]([url](https://www.smartfantasybaseball.com/tag/player-id/)https://www.smartfantasybaseball.com/tag/player-id/)
