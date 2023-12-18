@@ -13,12 +13,22 @@ def plotData(data, balls, strikes):
     st.dataframe(data_filtered)
 
 
-df = pd.read_csv("../Data/BrayanBello2023Data.csv")
+@st.cache_data
+def loadData():
+    df = pd.read_csv("../Data/BrayanBello2023Data.csv")
+    names = df.drop_duplicates(['pitcher', 'player_name'])
+    names = dict(zip(names['pitcher'], names['player_name']))
+    return df, names
+
+
+df, names = loadData()
 
 with st.sidebar.form(key="Filters"):
     st.subheader("Data Filters:")
+    player = st.multiselect("Player", options=pd.unique(df['pitcher']), format_func=lambda pitcher: names[pitcher], default=None)
     balls = st.number_input("Balls", min_value=0, max_value=3, step=1, value=None)
     strikes = st.number_input("Strikes", min_value=0, max_value=2, step=1, value=None)
     st.form_submit_button("Apply")
 
-plotData(df, balls, strikes)
+if len(player) != 0:
+    plotData(df, balls, strikes)
